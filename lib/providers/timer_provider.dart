@@ -1,0 +1,59 @@
+import 'dart:async';
+import 'package:flutter/material.dart';
+
+class TimerProvider with ChangeNotifier {
+  Timer? _timer;
+  int _secondsRemaining = 25 * 60; // 25 minutos 
+  bool _isRunning = false;
+  bool _isBreak = false;
+
+  int get secondsRemaining => _secondsRemaining;
+  bool get isRunning => _isRunning;
+  bool get isBreak => _isBreak;
+
+  String get timerString {
+    int minutes = _secondsRemaining ~/ 60;
+    int seconds = _secondsRemaining % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  }
+
+  void toggleTimer() {
+    if (_isRunning) {
+      _timer?.cancel();
+    } else {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (_secondsRemaining > 0) {
+          _secondsRemaining--;
+          notifyListeners();
+        } else {
+          _completeCycle();
+        }
+      });
+    }
+    _isRunning = !_isRunning;
+    notifyListeners();
+  }
+
+  void _completeCycle() {
+    _timer?.cancel();
+    _isRunning = false;
+    if (!_isBreak) {
+      // Ciclo de estudo concluído, inicia descanso de 5 min 
+      _isBreak = true;
+      _secondsRemaining = 5 * 60;
+    } else {
+      // Descanso concluído, volta para 25 min 
+      _isBreak = false;
+      _secondsRemaining = 25 * 60;
+    }
+    notifyListeners();
+  }
+
+  void resetTimer() {
+    _timer?.cancel();
+    _isRunning = false;
+    _isBreak = false;
+    _secondsRemaining = 25 * 60;
+    notifyListeners();
+  }
+}
