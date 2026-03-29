@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "297678789196",
+    "project_id": "petrofocus-dln47",
+    "storage_bucket": "petrofocus-dln47.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297678789196:android:1538b92fc5b4558764f2e9",
+        "android_client_info": {
+          "package_name": "com.petrofocus.petro_focus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ8AZfaQENcWAhGc5gZ6zQfOr2bee1qVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
