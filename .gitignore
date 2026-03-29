@@ -46,3 +46,6 @@ app.*.map.json
 
 # Firebase (Segurança)
 lib/firebase_options.dart
+
+# Chaves de API e ambiente
+.env
