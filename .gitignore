@@ -49,3 +49,7 @@ lib/firebase_options.dart
 
 # Chaves de API e ambiente
 .env
+
+# Documentação interna (não versionada)
+CLAUDE.md
+docs/visao-geral.md

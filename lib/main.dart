@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'firebase_options.dart'; 
+import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'providers/timer_provider.dart';
 import 'screens/pomodoro_screen.dart';
