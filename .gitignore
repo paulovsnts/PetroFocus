@@ -53,3 +53,6 @@ lib/firebase_options.dart
 # Documentação interna (não versionada)
 CLAUDE.md
 docs/visao-geral.md
+
+# Plano de estudos pessoal (dados do edital, não versionado)
+lib/core/seed_materias.dart

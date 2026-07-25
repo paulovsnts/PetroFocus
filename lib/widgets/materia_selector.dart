@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../core/theme.dart';
 import '../data/models/materia_model.dart';
 import '../providers/materia_provider.dart';
 
@@ -22,21 +23,30 @@ class MateriaSelector extends StatelessWidget {
       return const Text('Nenhuma matéria cadastrada');
     }
 
-    return DropdownButton<MateriaModel>(
-      value: materiaProvider.materiaSelecionada,
-      items: materiaProvider.materias
-          .map(
-            (materia) => DropdownMenuItem(
-              value: materia,
-              child: Text('${materia.nome} (${materia.bloco})'),
-            ),
-          )
-          .toList(),
-      onChanged: (materia) {
-        if (materia != null) {
-          materiaProvider.selecionarMateria(materia);
-        }
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.contentMargin),
+      child: DropdownButton<MateriaModel>(
+        isExpanded: true,
+        menuMaxHeight: MediaQuery.of(context).size.height * 0.4,
+        value: materiaProvider.materiaSelecionada,
+        items: materiaProvider.materias
+            .map(
+              (materia) => DropdownMenuItem(
+                value: materia,
+                child: Text(
+                  '${materia.nome} (${materia.bloco})',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
+            )
+            .toList(),
+        onChanged: (materia) {
+          if (materia != null) {
+            materiaProvider.selecionarMateria(materia);
+          }
+        },
+      ),
     );
   }
 }

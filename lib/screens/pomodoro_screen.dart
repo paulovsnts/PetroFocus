@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/timer_provider.dart';
 import '../providers/materia_provider.dart';
-import '../data/models/sessao_estudo_model.dart';
-import '../data/repositories/sessao_estudo_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/materia_selector.dart';
 import '../core/theme.dart';
+import 'fechamento_sessao_screen.dart';
 
 class PomodoroScreen extends StatefulWidget {
   const PomodoroScreen({super.key});
@@ -16,7 +15,6 @@ class PomodoroScreen extends StatefulWidget {
 }
 
 class _PomodoroScreenState extends State<PomodoroScreen> {
-  final _sessaoEstudoRepository = SessaoEstudoRepository();
   late int _ultimoCicloRegistrado;
 
   @override
@@ -48,10 +46,13 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
       return;
     }
 
-    _sessaoEstudoRepository.salvarSessao(
-      SessaoEstudoModel(
+    showModalBottomSheet(
+      context: context,
+      isDismissible: false,
+      enableDrag: false,
+      isScrollControlled: true,
+      builder: (_) => FechamentoSessaoScreen(
         materiaId: materiaSelecionada.id,
-        dataEstudo: DateTime.now(),
         minutosTotais: TimerProvider.estudoMinutos,
       ),
     );
