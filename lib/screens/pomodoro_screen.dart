@@ -6,6 +6,7 @@ import '../data/models/sessao_estudo_model.dart';
 import '../data/repositories/sessao_estudo_repository.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/materia_selector.dart';
+import '../core/theme.dart';
 
 class PomodoroScreen extends StatefulWidget {
   const PomodoroScreen({super.key});
@@ -59,9 +60,11 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
   @override
   Widget build(BuildContext context) {
     final timerProvider = Provider.of<TimerProvider>(context);
+    final petroFocusColors = Theme.of(context).extension<PetroFocusColors>()!;
 
     return Scaffold(
-      backgroundColor: timerProvider.isBreak ? Colors.green[50] : Colors.blue[50],
+      backgroundColor:
+          timerProvider.isBreak ? petroFocusColors.descanso : petroFocusColors.foco,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -75,7 +78,7 @@ class _PomodoroScreenState extends State<PomodoroScreen> {
             const SizedBox(height: 20),
             Text(
               timerProvider.timerString,
-              style: GoogleFonts.shareTechMono(fontSize: 80, color: Colors.black87),
+              style: AppTypography.displayTimer,
             ),
             const SizedBox(height: 40),
             Row(
