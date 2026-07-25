@@ -8,4 +8,16 @@ class SessaoEstudoRepository {
   Future<void> salvarSessao(SessaoEstudoModel sessao) {
     return _collection.add(sessao.toMap());
   }
+
+  Stream<List<SessaoEstudoModel>> getUltimasSessoes({int limite = 20}) {
+    return _collection
+        .orderBy('data_estudo', descending: true)
+        .limit(limite)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => SessaoEstudoModel.fromFirestore(doc))
+              .toList(),
+        );
+  }
 }
