@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'core/theme.dart';
 import 'providers/timer_provider.dart';
+import 'providers/materia_provider.dart';
 import 'screens/pomodoro_screen.dart';
 
 void main() async {
@@ -19,6 +21,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TimerProvider()),
+        ChangeNotifierProvider(create: (_) => MateriaProvider()),
       ],
       child: const MyApp(),
     ),
@@ -33,10 +36,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Petro Focus',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: AppTheme.dark,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.dark,
       home: const PomodoroScreen(),
     );
   }
