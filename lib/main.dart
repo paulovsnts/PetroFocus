@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'providers/timer_provider.dart';
+import 'providers/materia_provider.dart';
 import 'screens/pomodoro_screen.dart';
 
 void main() async {
@@ -19,6 +20,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TimerProvider()),
+        ChangeNotifierProvider(create: (_) => MateriaProvider()),
       ],
       child: const MyApp(),
     ),
