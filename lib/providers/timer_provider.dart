@@ -2,14 +2,19 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class TimerProvider with ChangeNotifier {
+  static const int estudoMinutos = 25;
+  static const int descansoMinutos = 5;
+
   Timer? _timer;
-  int _secondsRemaining = 25 * 60; // 25 minutos 
+  int _secondsRemaining = estudoMinutos * 60;
   bool _isRunning = false;
   bool _isBreak = false;
+  int _ciclosDeEstudoConcluidos = 0;
 
   int get secondsRemaining => _secondsRemaining;
   bool get isRunning => _isRunning;
   bool get isBreak => _isBreak;
+  int get ciclosDeEstudoConcluidos => _ciclosDeEstudoConcluidos;
 
   String get timerString {
     int minutes = _secondsRemaining ~/ 60;
@@ -38,13 +43,14 @@ class TimerProvider with ChangeNotifier {
     _timer?.cancel();
     _isRunning = false;
     if (!_isBreak) {
-      // Ciclo de estudo concluído, inicia descanso de 5 min 
+      // Ciclo de estudo concluído, inicia descanso
+      _ciclosDeEstudoConcluidos++;
       _isBreak = true;
-      _secondsRemaining = 5 * 60;
+      _secondsRemaining = descansoMinutos * 60;
     } else {
-      // Descanso concluído, volta para 25 min 
+      // Descanso concluído, volta para o estudo
       _isBreak = false;
-      _secondsRemaining = 25 * 60;
+      _secondsRemaining = estudoMinutos * 60;
     }
     notifyListeners();
   }
@@ -53,7 +59,7 @@ class TimerProvider with ChangeNotifier {
     _timer?.cancel();
     _isRunning = false;
     _isBreak = false;
-    _secondsRemaining = 25 * 60;
+    _secondsRemaining = estudoMinutos * 60;
     notifyListeners();
   }
 }
